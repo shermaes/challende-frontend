@@ -1,17 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import reducer from './Reducer'
 
-const initialState = [{
-            id:1,
-            categoryTitle:"This is the name of category",
-            task: [{
-                id:2,
-                title: "title of the task test",
-                message:"message test",
-                done:false,
-                fkCategoryId:1
-            }] 
-    }]
+const initialState = []
 
 
 const Store = createContext(initialState)

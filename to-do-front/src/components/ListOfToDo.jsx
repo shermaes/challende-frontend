@@ -1,12 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Store } from '../stateManagement/StoreProvider'
 
 const ListOfToDo = () => {
 
     const {state, dispatch} = useContext(Store)
-    console.log(state);
-    console.log(state);
-  
+
+    useEffect(()=> {
+        let listOfCategories = fetchAllCategories().then(
+            categories=>{
+                console.log(categories);
+
+             let action = {
+                 type: 'get-categories',
+                 payload: categories
+                } 
+            dispatch(action)  
+            }
+        )
+  }, [])
+
+  const fetchAllCategories = async() =>{
+    let response = await fetch(`http://localhost:8081/api/get/categories`)
+    let data = await response.json()
+    return data
+}
+
+    
+
     return (
       <div>
           <h1>Actions pending to be done</h1>
@@ -16,8 +36,6 @@ const ListOfToDo = () => {
                    category id: {note.id} <br />
                     {note.categoryTitle} <br />
                     <p>---------------------------</p>
-              {note.task.map(tsk => tsk.title)} <br />
-              {note.task.map(tsk => tsk.message)} <br />
                 </li>
             })}
         </ul>

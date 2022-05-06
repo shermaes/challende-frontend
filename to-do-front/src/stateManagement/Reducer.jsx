@@ -1,9 +1,23 @@
 function reducer(state, action){
     //here I have the actions that can be performed on my app, I affect the state from here
     switch(action.type){
+        case 'get-categories':
+            const stateWithAllTheCategories = [...action.payload
+            ]
+            return stateWithAllTheCategories
+
         case 'add-category':
-            //I have to create a new state when modifying this
-            return state
+            console.log("adding category");
+            const newCategory = {
+                id:Math.floor(Math.random()*100),
+                categoryTitle:action.payload.categoryTitle,  
+            }
+
+            const newStateAddedCategory = [...state, newCategory] 
+        
+            return newStateAddedCategory;
+
+           
         case 'remove-category':
             return state
         case 'add-task': 
