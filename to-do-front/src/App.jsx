@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import StoreProvider from './stateManagement/StoreProvider'
 import Form from './components/Form'
+import ListOfToDo from './components/ListOfToDo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +14,7 @@ function App() {
       <StoreProvider>
       <h1 style={{backgroundColor: "orange"}}>Here's what you have to do today</h1>
       <Form/>
+      <ListOfToDo/>
     </StoreProvider>
     </div>
   )

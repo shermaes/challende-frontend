@@ -2,7 +2,16 @@ import React, { createContext, useReducer } from 'react'
 import reducer from './Reducer'
 
 const initialState = {
-    todo: { category: [], task: {} }
+    todo: { 
+
+        category: [], 
+        task: [] 
+    },
+    listOfCategories:[{
+        category: "This is the name of category",
+        task: "Test task of that category"
+
+    }]
   }
 
 const Store = createContext(initialState)
