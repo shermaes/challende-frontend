@@ -13,7 +13,7 @@ function App() {
       </header>
       <StoreProvider>
       <h1 style={{backgroundColor: "orange"}}>Here's what you have to do today</h1>
-      <Form/>
+       <Form/> 
       <ListOfToDo/>
     </StoreProvider>
     </div>

@@ -5,16 +5,19 @@ const ListOfToDo = () => {
 
     const {state, dispatch} = useContext(Store)
     console.log(state);
-    console.log(state.listOfCategories);
+    console.log(state);
   
     return (
       <div>
           <h1>Actions pending to be done</h1>
           <ul>
-        {state.listOfCategories.map(note => {
-                return <li> 
-                {note.category} <br />
-                {note.task} <br />
+        {state.map(note=> {
+                return <li>
+                   category id: {note.id} <br />
+                    {note.categoryTitle} <br />
+                    <p>---------------------------</p>
+              {note.task.map(tsk => tsk.title)} <br />
+              {note.task.map(tsk => tsk.message)} <br />
                 </li>
             })}
         </ul>
