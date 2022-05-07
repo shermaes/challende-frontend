@@ -18,13 +18,14 @@ function reducer(state, action){
 
            
         case 'remove-category':
-            return state
+            const newListOfCategoriesWithoutPayloadCategory = state.filter(category => category.id !== action.payload.id)
+            return newListOfCategoriesWithoutPayloadCategory;
+
         case 'add-task': 
             return state
 
         case 'update-task':
             const stateCategoryToUpdate = state.find(tasks=> tasks.id === action.payload.fkCategoryId)
-            // console.log(stateCategoryToUpdate)
             const stateTasksToUpdate = stateCategoryToUpdate.tasks.map(task => {
                 if(task.id===action.payload.id){
                     return action.payload

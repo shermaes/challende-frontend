@@ -49,7 +49,21 @@ const onCheckbox = async (event, tsk) => {
         type: 'update-task',
         payload:taskUpdated
     })
-}
+     }
+
+     const onDeleteCategory = async (note)=> {
+         console.log(note)
+         let response = await fetch(`http://localhost:8081/api/delete/category/${note.id}`, 
+         {
+             method: 'DELETE'
+         })
+    
+         if(response.status === 200){
+           dispatch({
+            type: 'remove-category',
+            payload: note 
+           })
+        }}
 
 
     return (
@@ -57,10 +71,11 @@ const onCheckbox = async (event, tsk) => {
       <div>
           <h1>Actions pending to be done</h1>
           <ul>
-        {state.map(note=> {
-                return <p key={note.id}>
+         {state.map(note=> {
+                return <div key={note.id}>
                     
                     {note.name} <br />
+                    <button onClick={()=> onDeleteCategory(note)}>Delete</button>
                     {note.tasks.map(tsk => 
                         <li key={tsk.id}>{tsk.title} <br />
                         {tsk.message}
@@ -68,11 +83,12 @@ const onCheckbox = async (event, tsk) => {
                         </li>    
                         )} <br />
                     <p>---------------------------</p>
-                </p>
+                </div>
             })}
         </ul>
       </div>
     )
   }
+
 //onChange executes an action 
 export default ListOfToDo
