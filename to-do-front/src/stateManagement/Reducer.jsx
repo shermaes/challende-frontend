@@ -1,64 +1,78 @@
-function reducer(state, action){
-    //here I have the actions that can be performed on my app, I affect the state from here
-    switch(action.type){
-        case 'get-categories':
-            const stateWithAllTheCategories = [...action.payload
-            ]
-            return stateWithAllTheCategories
+function reducer(state, action) {
+  //here I have the actions that can be performed on my app, I affect the state from here
+  switch (action.type) {
+    case "get-categories":
+      const stateWithAllTheCategories = [...action.payload];
+      return stateWithAllTheCategories;
 
-        case 'add-category':
-            
-                const newCategory = action.payload;
+    case "add-category":
+      const newCategory = action.payload;
 
-                const newListOfCategoriesAddedOne = [...state, newCategory] 
-    
-                return newListOfCategoriesAddedOne;
-            
+      const newListOfCategoriesAddedOne = [...state, newCategory];
 
-           
-        case 'remove-category':
-            const newListOfCategoriesWithoutPayloadCategory = state.filter(category => category.id !== action.payload.id)
-            return newListOfCategoriesWithoutPayloadCategory;
+      return newListOfCategoriesAddedOne;
 
-        case 'add-task': 
-            return state
+    case "remove-category":
+      const newListOfCategoriesWithoutPayloadCategory = state.filter(
+        (category) => category.id !== action.payload.id
+      );
+      return newListOfCategoriesWithoutPayloadCategory;
 
-        case 'update-task':
-            const stateCategoryToUpdate = state.find(tasks=> tasks.id === action.payload.fkCategoryId)
-            const stateTasksToUpdate = stateCategoryToUpdate.tasks.map(task => {
-                if(task.id===action.payload.id){
-                    return action.payload
-                }
-                return task
-            })
-            const newStateCategoryWithModifiedCheckbox = {...stateCategoryToUpdate, tasks:stateTasksToUpdate}
+    case "add-task":
+      const stateCategoryToAddTask = state.map(category => {
+          if (category.id === action.payload.id) {
+              return action.payload
+          }
+          return category
+      })
+      return stateCategoryToAddTask;
 
-            const newStateWithUpdatedTask = state.map(category => {
-                if ( category.id === action.payload.fkCategoryId) {
-                    return newStateCategoryWithModifiedCheckbox
-                }
-                return category
-            })
+    case "update-task":
+      const stateCategoryToUpdate = state.find(
+        (tasks) => tasks.id === action.payload.fkCategoryId
+      );
+      const stateTasksToUpdate = stateCategoryToUpdate.tasks.map((task) => {
+        if (task.id === action.payload.id) {
+          return action.payload;
+        }
+        return task;
+      });
+      const newStateCategoryWithModifiedCheckbox = {
+        ...stateCategoryToUpdate,
+        tasks: stateTasksToUpdate,
+      };
 
-            return newStateWithUpdatedTask 
-            
-        case 'remove-task':
-            const stateCategoryOfTheTaskToBeErased = state.find(tasks=> tasks.id === action.payload.fkCategoryId)
-            const stateTaskToErased = stateCategoryOfTheTaskToBeErased.tasks.filter(task => {
-             return task.id!==action.payload.id   
-            })
-            const newStateCategoryWithoutTheTask = {...stateCategoryOfTheTaskToBeErased, tasks:stateTaskToErased}
+      const newStateWithUpdatedTask = state.map((category) => {
+        if (category.id === action.payload.fkCategoryId) {
+          return newStateCategoryWithModifiedCheckbox;
+        }
+        return category;
+      });
 
-            const newStateWithoutTask = state.map(category => {
-                if ( category.id === action.payload.fkCategoryId) {
-                    return newStateCategoryWithoutTheTask 
-                }
-                return category    
-             })
+      return newStateWithUpdatedTask;
 
-             return newStateWithoutTask
+    case "remove-task":
+      const stateCategoryOfTheTaskToBeErased = state.find(
+        (tasks) => tasks.id === action.payload.fkCategoryId
+      );
+      const stateTaskToErased = stateCategoryOfTheTaskToBeErased.tasks.filter(
+        (task) => {
+          return task.id !== action.payload.id;
+        }
+      );
+      const newStateCategoryWithoutTheTask = {
+        ...stateCategoryOfTheTaskToBeErased,
+        tasks: stateTaskToErased,
+      };
 
+      const newStateWithoutTask = state.map((category) => {
+        if (category.id === action.payload.fkCategoryId) {
+          return newStateCategoryWithoutTheTask;
+        }
+        return category;
+      });
 
-    }
+      return newStateWithoutTask;
+  }
 }
-export default reducer
+export default reducer;
