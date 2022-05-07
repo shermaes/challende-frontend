@@ -52,7 +52,6 @@ const onCheckbox = async (event, tsk) => {
      }
 
      const onDeleteCategory = async (note)=> {
-         console.log(note)
          let response = await fetch(`http://localhost:8081/api/delete/category/${note.id}`, 
          {
              method: 'DELETE'
@@ -64,6 +63,20 @@ const onCheckbox = async (event, tsk) => {
             payload: note 
            })
         }}
+
+        const onDeleteTask = async (tsk)=> {
+            console.log(tsk)
+            let response = await fetch(`http://localhost:8081/api/delete/task/${tsk.id}`, 
+            {
+                method: 'DELETE'
+            })
+       
+            if(response.status === 200){
+              dispatch({
+               type: 'remove-task',
+               payload: tsk
+              })
+           }}
 
 
     return (
@@ -78,6 +91,7 @@ const onCheckbox = async (event, tsk) => {
                     <button onClick={()=> onDeleteCategory(note)}>Delete</button>
                     {note.tasks.map(tsk => 
                         <li key={tsk.id}>{tsk.title} <br />
+                        <button onClick={()=> onDeleteTask(tsk)}>Delete</button>    
                         {tsk.message}
                         <input onChange={(event) => onCheckbox(event, tsk)} type="checkbox"  checked={tsk.done}/>
                         </li>    

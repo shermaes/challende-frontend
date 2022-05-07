@@ -44,7 +44,22 @@ function reducer(state, action){
             return newStateWithUpdatedTask 
             
         case 'remove-task':
-            return state          
+            const stateCategoryOfTheTaskToBeErased = state.find(tasks=> tasks.id === action.payload.fkCategoryId)
+            const stateTaskToErased = stateCategoryOfTheTaskToBeErased.tasks.filter(task => {
+             return task.id!==action.payload.id   
+            })
+            const newStateCategoryWithoutTheTask = {...stateCategoryOfTheTaskToBeErased, tasks:stateTaskToErased}
+
+            const newStateWithoutTask = state.map(category => {
+                if ( category.id === action.payload.fkCategoryId) {
+                    return newStateCategoryWithoutTheTask 
+                }
+                return category    
+             })
+
+             return newStateWithoutTask
+
+
     }
 }
 export default reducer
