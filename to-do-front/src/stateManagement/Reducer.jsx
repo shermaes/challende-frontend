@@ -7,14 +7,13 @@ function reducer(state, action){
             return stateWithAllTheCategories
 
         case 'add-category':
-            const newCategory = {
-                id:Math.floor(Math.random()*100),
-                categoryTitle:action.payload.categoryTitle,  
-            }
+            
+                const newCategory = action.payload;
 
-            const newStateAddedCategory = [...state, newCategory] 
-        
-            return newStateAddedCategory;
+                const newListOfCategoriesAddedOne = [...state, newCategory] 
+    
+                return newListOfCategoriesAddedOne;
+            
 
            
         case 'remove-category':
