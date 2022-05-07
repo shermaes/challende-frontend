@@ -9,7 +9,7 @@ First, clone this [backend](https://github.com/shermaes/challenge-backend) into 
 For it to run as expected, you need to have Laragon installed. 
 SQLyog is needed so you can create the schema where you will be working. (categories).
 
-Now, clone this frontend repository into your local and open your terminal so you can use the following command:
+Now, clone this frontend repository into your local and open your terminal so you can use the following command (please check that you have npm installed first):
 
 ```bash
 npm install
