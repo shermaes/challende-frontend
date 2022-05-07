@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Store } from "../stateManagement/StoreProvider";
 
 const ListOfToDo = () => {
+  const formRef = useRef(null);
   const { state, dispatch } = useContext(Store);
   const [title, setTitle] = useState("");
 
@@ -86,6 +87,7 @@ const ListOfToDo = () => {
   };
 
   const onAddTask = async (note) => {
+  
     if (title) {
       const taskFromForm = {
         title: title,
@@ -108,8 +110,11 @@ const ListOfToDo = () => {
           type: "add-task",
           payload: categoryWithNewTask,
         });
+        
       }
+      formRef.current.reset();
     }
+    
   };
 
   const addingTitle = (e) => {
@@ -144,6 +149,7 @@ const ListOfToDo = () => {
         type: "update-task",
         payload: taskUpdated,
       });
+      
       }
 
 
@@ -153,7 +159,7 @@ const ListOfToDo = () => {
 
 
   return (
-    <div>
+    <div ref={formRef}>
       <h1>Actions pending to be done</h1>
       <ul>
         {state.map((note) => {
@@ -165,7 +171,7 @@ const ListOfToDo = () => {
               </button>{" "}
               <br />
               <input type="text" onChange={addingTitle} name="title" />
-              <button onClick={() => onAddTask(note)}>Add New List</button>
+              <button onClick={() => onAddTask(note)}>Add new task</button>
               {note.tasks.map((tsk) => (
                 <li key={tsk.id}>
                   {tsk.title} <br />
@@ -180,7 +186,7 @@ const ListOfToDo = () => {
                 </li>
               ))}{" "}
               <br />
-              <p>---------------------------</p>
+              <hr />
             </div>
           );
         })}

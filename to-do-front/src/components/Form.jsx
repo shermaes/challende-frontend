@@ -48,7 +48,7 @@ const Form = () => {
     <form ref={formRef}>
         <label>Category:</label>
         <input onChange={addingName} type="text" name= "title"/>
-        <button onClick={onAdd}>Add New List</button>
+        <button onClick={onAdd}>Add a list</button>
     </form>
   )
 

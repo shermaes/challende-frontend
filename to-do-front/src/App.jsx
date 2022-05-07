@@ -9,10 +9,10 @@ function App() {
   return (
     <div className="My To-Do app">
       <header className="To-do-header">
-        <h1 style={{ backgroundColor: "orange" }}>My To-Do app</h1>
+        <h1 style={{ backgroundColor: "pink" }}>My To-Do app</h1>
       </header>
       <StoreProvider>
-        <h1 style={{ backgroundColor: "orange" }}>
+        <h1 style={{ backgroundColor: "pink" }}>
           Here's what you have to do today
         </h1>
         <Form />
