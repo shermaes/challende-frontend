@@ -9,9 +9,6 @@ const Form = () => {
     const { state, dispatch } = useContext(Store);
 
     const [categoryTitle, setCategoryTitle] = useState('')
-
-    console.log(categoryTitle);
-
     const onAdd = (event) => {
       event.preventDefault();
       if(categoryTitle){

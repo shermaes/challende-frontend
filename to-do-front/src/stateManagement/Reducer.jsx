@@ -7,7 +7,6 @@ function reducer(state, action){
             return stateWithAllTheCategories
 
         case 'add-category':
-            console.log("adding category");
             const newCategory = {
                 id:Math.floor(Math.random()*100),
                 categoryTitle:action.payload.categoryTitle,  
@@ -22,8 +21,27 @@ function reducer(state, action){
             return state
         case 'add-task': 
             return state
+
         case 'update-task':
-            return state 
+            const stateCategoryToUpdate = state.find(tasks=> tasks.id === action.payload.fkCategoryId)
+            // console.log(stateCategoryToUpdate)
+            const stateTasksToUpdate = stateCategoryToUpdate.tasks.map(task => {
+                if(task.id===action.payload.id){
+                    return action.payload
+                }
+                return task
+            })
+            const newStateCategoryWithModifiedCheckbox = {...stateCategoryToUpdate, tasks:stateTasksToUpdate}
+
+            const newStateWithUpdatedTask = state.map(category => {
+                if ( category.id === action.payload.fkCategoryId) {
+                    return newStateCategoryWithModifiedCheckbox
+                }
+                return category
+            })
+
+            return newStateWithUpdatedTask 
+            
         case 'remove-task':
             return state          
     }
